@@ -2,7 +2,7 @@
 Set of scripts for reads deduplication by UMI
 
 # How to use
-Proceesing of reads organized in two stages:
+Proceesing of reads organized in two stages.
 1) Removing barcodes from reads and storing association of it with reads
 - single - end reads
 FilterAndStoreBySTLSE.pl <fastq file> <barcodes list file> <out stl file> <out fastq file>
@@ -31,7 +31,7 @@ DedupBySTLPE.pl <sam file> <stl file R1> <stl file R2> <out sam file>
 <stl file R1>/<stl file R2> - input files with with asscociation of barcodes and reads
 <out sam file> - output deduplicated sam file 
 
-To extract deduplicated reads from bam file you can use this scripts:
+To extract deduplicated reads from bam file you can use this scripts.
 - single - end reads
 GetDedupReadsSE.pl <sam file> <stl file> <out sam file>
 <sam file> - input sam file with alignments
