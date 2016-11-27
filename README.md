@@ -5,6 +5,9 @@ Set of scripts for reads deduplication by UMI
 Proceesing of reads organized in two stages:
 
 1) Removing barcodes from reads and storing association of it with reads
+
+- for fixed set of barcodes
+
 - single - end reads
 FilterAndStoreBySTLSE.pl <fastq file> <barcodes list file> <out stl file> <out fastq file>
 <fastq file> - input file with reads to process
@@ -17,6 +20,23 @@ FilterAndStoreBySTLSE.pl <fastq file R1> <fastq file R2> <barcodes list file> <o
 <barcodes list file> - input file with list of barcodes
 <out stl file R1>/<out stl file R2> - output files with asscociation of barcodes and reads
 <out fastq file R1>/<out fastq file R2> - output file with reads with trimmed barcodes
+
+- for random set of barcodes
+- single - end reads
+FilterAndStoreBySTLSE.pl <fastq file> <length of barcode> <min count of barcode> <out stl file> <out fastq file>
+<fastq file> - input file with reads to process
+<length of barcode> - length of read prefix corresponding to barcode
+<min count of barcode> - minimum number of reads with barcodes to be considered it reliable
+<out stl file> - output file with asscociation of barcodes and reads
+<out fastq file> - output file with reads with trimmed barcodes
+- paired - end reads
+FilterAndStoreBySTLSE.pl <fastq file R1> <fastq file R2> <length of barcode> <min count of barcode> <out stl file R1> <out stl file R2> <out fastq file R1> <out fastq file R2>
+<fastq file R1>/<fastq file R2> - input files with reads. Mate reads must be separated in different files.
+<length of barcode> - length of read prefix corresponding to barcode
+<min count of barcode> - minimum number of reads with barcodes to be considered it reliable
+<out stl file R1>/<out stl file R2> - output files with asscociation of barcodes and reads
+<out fastq file R1>/<out fastq file R2> - output file with reads with trimmed barcodes
+
 
 After this stage you need to align reads by some any aligner produces output in SAM format.
 
