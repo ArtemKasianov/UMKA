@@ -15,11 +15,22 @@ my %stlList = ();
 
 open(FTR,"<$stlFile") or die;
 
+my $lengthOfSTL = -1;
 
 while (my $input = <FTR>) {
     chomp($input);
     
     $stlList{"$input"} = 1;
+    if ($lengthOfSTL != -1) {
+	if ($lengthOfSTL != length($input)) {
+	    die("not uniform STL")
+	}
+	
+    }
+    else
+    {
+	$lengthOfSTL = length($input);
+    }
 }
 
 
@@ -51,10 +62,10 @@ while (my $input = <FTR_1>) {
     chomp($input);
     my $seqNam = substr($input,1);
     $input = <FTR_1>;
-    my $seqWo9 = substr($input,9);
-    $strToWrite = $strToWrite.$seqWo9;
+    my $seqWoSTL = substr($input,$lengthOfSTL);
+    $strToWrite = $strToWrite.$seqWoSTL;
     chomp($input);
-    my $first8 = substr($input,0,8);
+    my $firstSTL = substr($input,0,$lengthOfSTL);
     
     my $input2 = <FTR_2>;
     my $strToWrite2 = "";
@@ -62,16 +73,16 @@ while (my $input = <FTR_1>) {
     chomp($input2);
     my $seqNam2 = substr($input2,1);
     $input2 = <FTR_2>;
-    my $seqWo9_2 = substr($input2,9);
-    $strToWrite2 = $strToWrite2.$seqWo9_2;
+    my $seqWoSTL_2 = substr($input2,$lengthOfSTL);
+    $strToWrite2 = $strToWrite2.$seqWoSTL_2;
     chomp($input2);
-    my $first8_2 = substr($input2,0,8);
+    my $firstSTL_2 = substr($input2,0,$lengthOfSTL);
     
-    if ((exists $stlList{"$first8"}) && (exists $stlList{"$first8_2"})) {
+    if ((exists $stlList{"$firstSTL"}) && (exists $stlList{"$firstSTL_2"})) {
 	$stlCount++;
 	$isWrite = 1;
-	if (exists $barcodsList_1{"$first8"}) {
-	    my $ptrArrSeqNams = $barcodsList_1{"$first8"};
+	if (exists $barcodsList_1{"$firstSTL"}) {
+	    my $ptrArrSeqNams = $barcodsList_1{"$firstSTL"};
 	    push @$ptrArrSeqNams,$seqNam;
 	    
 	}
@@ -79,11 +90,11 @@ while (my $input = <FTR_1>) {
 	{
 	    my @arrSeqNams = ();
 	    push @arrSeqNams,$seqNam;
-	    $barcodsList_1{"$first8"} = \@arrSeqNams;
+	    $barcodsList_1{"$firstSTL"} = \@arrSeqNams;
 	}
 	
-	if (exists $barcodsList_2{"$first8_2"}) {
-	    my $ptrArrSeqNams = $barcodsList_2{"$first8_2"};
+	if (exists $barcodsList_2{"$firstSTL_2"}) {
+	    my $ptrArrSeqNams = $barcodsList_2{"$firstSTL_2"};
 	    push @$ptrArrSeqNams,$seqNam2;
 	    
 	}
@@ -91,7 +102,7 @@ while (my $input = <FTR_1>) {
 	{
 	    my @arrSeqNams = ();
 	    push @arrSeqNams,$seqNam2;
-	    $barcodsList_2{"$first8_2"} = \@arrSeqNams;
+	    $barcodsList_2{"$firstSTL_2"} = \@arrSeqNams;
 	}
     }
     
@@ -101,8 +112,8 @@ while (my $input = <FTR_1>) {
     $input = <FTR_1>;
     $strToWrite = $strToWrite.$input;
     $input = <FTR_1>;
-    my $qualWo9 = substr($input,9);
-    $strToWrite = $strToWrite.$qualWo9;
+    my $qualWoSTL = substr($input,$lengthOfSTL);
+    $strToWrite = $strToWrite.$qualWoSTL;
     
     if ($isWrite == 1) {
 	print FTW_3 "$strToWrite";
@@ -112,8 +123,8 @@ while (my $input = <FTR_1>) {
     $input2 = <FTR_2>;
     $strToWrite2 = $strToWrite2.$input2;
     $input2 = <FTR_2>;
-    my $qualWo9_2 = substr($input2,9);
-    $strToWrite2 = $strToWrite2.$qualWo9_2;
+    my $qualWoSTL_2 = substr($input2,$lengthOfSTL);
+    $strToWrite2 = $strToWrite2.$qualWoSTL_2;
     
     if ($isWrite == 1) {
 	print FTW_4 "$strToWrite2";

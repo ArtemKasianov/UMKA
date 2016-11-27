@@ -12,11 +12,24 @@ my %stlList = ();
 
 open(FTR,"<$stlFile") or die;
 
+my $lengthOfSTL = -1;
 
 while (my $input = <FTR>) {
     chomp($input);
     
     $stlList{"$input"} = 1;
+    if ($lengthOfSTL != -1) {
+	if ($lengthOfSTL != length($input)) {
+	    die("not uniform STL")
+	}
+	
+    }
+    else
+    {
+	$lengthOfSTL = length($input);
+    }
+    
+    
 }
 
 
@@ -44,16 +57,16 @@ while (my $input = <FTR>) {
     chomp($input);
     my $seqNam = substr($input,1);
     $input = <FTR>;
-    my $seqWo9 = substr($input,9);
-    $strToWrite = $strToWrite.$seqWo9;
+    my $seqWoSTL = substr($input,$lengthOfSTL);
+    $strToWrite = $strToWrite.$seqWoSTL;
     chomp($input);
-    my $first8 = substr($input,0,8);
+    my $stlString = substr($input,0,$lengthOfSTL);
     
-    if (exists $stlList{"$first8"}) {
+    if (exists $stlList{"$stlString"}) {
 	$stlCount++;
 	$isWrite = 1;
-	if (exists $barcodsList{"$first8"}) {
-	    my $ptrArrSeqNams = $barcodsList{"$first8"};
+	if (exists $barcodsList{"$stlString"}) {
+	    my $ptrArrSeqNams = $barcodsList{"$stlString"};
 	    push @$ptrArrSeqNams,$seqNam;
 	    
 	}
@@ -61,7 +74,7 @@ while (my $input = <FTR>) {
 	{
 	    my @arrSeqNams = ();
 	    push @arrSeqNams,$seqNam;
-	    $barcodsList{"$first8"} = \@arrSeqNams;
+	    $barcodsList{"$stlString"} = \@arrSeqNams;
 	}
     }
     
@@ -71,8 +84,8 @@ while (my $input = <FTR>) {
     $input = <FTR>;
     $strToWrite = $strToWrite.$input;
     $input = <FTR>;
-    my $qualWo9 = substr($input,9);
-    $strToWrite = $strToWrite.$qualWo9;
+    my $qualStr = substr($input,$lengthOfSTL);
+    $strToWrite = $strToWrite.$qualStr;
     
     if ($isWrite == 1) {
 	print FTW_1 "$strToWrite";
