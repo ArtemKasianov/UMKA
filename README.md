@@ -2,13 +2,14 @@
 Set of scripts for reads deduplication by UMI
 
 # How to use
-Proceesing of reads organized in two stages:
+Processing of reads organized in two stages:
 
 1) Removing barcodes from reads and storing association of it with reads
 
 - for fixed set of barcodes
 
   - single - end reads
+  
        FilterAndStoreBySTLSE.pl \<fastq file> \<barcodes list file> \<out stl file> \<out fastq file>
        
        \<fastq file> - input file with reads to process
@@ -20,6 +21,7 @@ Proceesing of reads organized in two stages:
        \<out fastq file> - output file with reads with trimmed barcodes
        
   - paired - end reads
+  
         FilterAndStoreBySTLSE.pl \<fastq file R1> \<fastq file R2> \<barcodes list file> \<out stl file R1> \<out stl file R2> \<out fastq file R1> \<out fastq file R2>
         
        \<fastq file R1>/\<fastq file R2> - input files with reads. Mate reads must be separated in different files.
