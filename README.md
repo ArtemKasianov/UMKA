@@ -9,7 +9,7 @@ Proceesing of reads organized in two stages:
 - for fixed set of barcodes
 
 - single - end reads
-FilterAndStoreBySTLSE.pl \<fastq file> <barcodes list file> <out stl file> <out fastq file>
+FilterAndStoreBySTLSE.pl \<fastq file> \<barcodes list file> \<out stl file> \<out fastq file>
 <fastq file> - input file with reads to process
 <barcodes list file> - input file with list of barcodes
 <out stl file> - output file with asscociation of barcodes and reads
