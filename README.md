@@ -36,7 +36,7 @@ Processing of reads organized in two stages:
 
   - single - end reads
   
-       FilterAndStoreBySTLSE.pl \<fastq file> \<length of barcode> \<min count of barcode> \<out stl file> \<out fastq file>
+       FilterAndStoreByRandomUMISE.pl \<fastq file> \<length of barcode> \<min count of barcode> \<out stl file> \<out fastq file>
        
        \<fastq file> - input file with reads to process
        
@@ -50,7 +50,7 @@ Processing of reads organized in two stages:
        
   - paired - end reads
   
-       FilterAndStoreBySTLPE.pl \<fastq file R1> \<fastq file R2> \<length of barcode> \<min count of barcode> \<out stl file R1> \<out stl file R2> \<out fastq file R1> \<out fastq file R2>
+       FilterAndStoreByRandomUMIPE.pl \<fastq file R1> \<fastq file R2> \<length of barcode> \<min count of barcode> \<out stl file R1> \<out stl file R2> \<out fastq file R1> \<out fastq file R2>
        
        \<fastq file R1>/\<fastq file R2> - input files with reads. Mate reads must be separated in different files.
        
