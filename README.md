@@ -64,7 +64,9 @@ Proceesing of reads organized in two stages:
 After this stage you need to align reads by some any aligner produces output in SAM format.
 
 2) Deduplicate reads 
+
 - single - end reads
+
     DedupBySTLSE.pl \<sam file> \<stl file> \<out sam file>
     
     \<sam file> - input sam file with alignment
