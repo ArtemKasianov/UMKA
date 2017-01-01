@@ -9,11 +9,11 @@ Proceesing of reads organized in two stages:
 - for fixed set of barcodes
 
  - single - end reads
-   FilterAndStoreBySTLSE.pl \<fastq file> \<barcodes list file> \<out stl file> \<out fastq file>
-   \<fastq file> - input file with reads to process
-   \<barcodes list file> - input file with list of barcodes
-   \<out stl file> - output file with asscociation of barcodes and reads
-   \<out fastq file> - output file with reads with trimmed barcodes
+       FilterAndStoreBySTLSE.pl \<fastq file> \<barcodes list file> \<out stl file> \<out fastq file>
+       \<fastq file> - input file with reads to process
+       \<barcodes list file> - input file with list of barcodes
+       \<out stl file> - output file with asscociation of barcodes and reads
+       \<out fastq file> - output file with reads with trimmed barcodes
 - paired - end reads
 FilterAndStoreBySTLSE.pl <fastq file R1> <fastq file R2> <barcodes list file> <out stl file R1> <out stl file R2> <out fastq file R1> <out fastq file R2>
 <fastq file R1>/<fastq file R2> - input files with reads. Mate reads must be separated in different files.
